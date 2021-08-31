@@ -1,0 +1,22 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}
+	{% if title %} {{ title }} {% else %} Web Inventory{% endif %}
+{% endblock %}
+
+{% block content %}
+	<br><br>
+    <div class="container">
+		{% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul>
+			{% for message in messages %}
+			<h3> {{ message }} </h3>
+			{% endfor %}
+		</ul>
+		{% endif %}
+		{% endwith %}
+		{% block app_content %}{% endblock %}
+	</div>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+<center>
+
+    <h1>Item</h1>
+    <button onclick="componentForm(1)">Show Form</button><button onclick="componentForm(0)">Hide Form</button>
+    <br><br>
+        <div id="component" class="row" style="visibility: hidden; display: none;">
+            <div class="col-md-4 col-lg-offset-4">
+                {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Device</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tr>
+                <th>{{ item.id }}</th>
+                <th>{{ item.device }}</th>
+                <th>{{ item.brand }}</th>
+                <th>{{ item.model }}</th>
+                <th>{{ item.price }}</th>
+                <th>{{ item.quantity }}</th>
+            </tr>
+        </table>
+        {% if item.notes != None %}
+        <h3>Notes</h3>
+        <p>{{ item.notes }}</p>
+        <br><br><br><br>
+        {% endif %}
+        <h2>Components</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Device</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            {% for component in components %}
+            <tr>
+                <th>{{ component.id }}</th>
+                <th>{{ component.part }}</th>
+                <th>{{ component.brand }}</th>
+                <th>{{ component.model }}</th>
+                <th>{{ component.price }}</th>
+                <th>{{ component.quantity }}</th>
+                <th><a href="{{ url_for('remove_component', itemid=item.id, component_id=component.id) }}" method="post">Delete</a></th>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    </center>
+    {% endblock %}
+    
+    <!-- 
+        
+        [ hidden form add part ]
+        
+        [ base item ] [link to remove item, components, and take back to home]
+
+    [ base items components/parts ]
+
+ -->

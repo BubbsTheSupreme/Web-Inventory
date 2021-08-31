@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <center>
+        <h1>Inventory</h1>
+        <button onclick="itemForm(1)">Show Form</button><button onclick="itemForm(0)">Hide Form</button>
+        <br><br>
+            <div id="item" class="row" style="visibility: hidden; display: none;">
+                <div class="col-md-4 col-lg-offset-4" >
+                    {{ wtf.quick_form(form, action="new_item", form_type="horizontal") }}
+                </div>
+            </div>
+        <div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Device</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                {% for i in inventory %}
+                    <tr>
+                        <th><a href="{{ url_for('item', itemid=i.id) }}">{{ i.id }}</a></th>
+                        <th>{{ i.device }}</th>
+                        <th>{{ i.brand }}</th>
+                        <th>{{ i.model }}</th>
+                        <th>{{ i.price }}</th>
+                        <th>{{ i.quantity }}</th>
+                        <th><a href="{{ url_for('remove_item', itemid=i.id) }}">Delete</a></th>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </center>
+{% endblock %}

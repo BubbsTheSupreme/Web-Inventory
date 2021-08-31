@@ -1,0 +1,6 @@
+flask
+flask-migrate
+flask-wtf
+flask-sqlalchemy
+flask-login
+flask-bootstrap
